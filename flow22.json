@@ -1,0 +1,329 @@
+[
+    {
+        "id": "6e9cc60423d918a7",
+        "type": "OpcUa-Client",
+        "z": "c731d0e8a174b926",
+        "endpoint": "a63d23549f2e20e3",
+        "action": "writemultiple",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": 10,
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": 1,
+        "maxMessageSize": 8192,
+        "receiveBufferSize": 8192,
+        "sendBufferSize": 8192,
+        "setstatusandtime": false,
+        "keepsessionalive": false,
+        "name": "",
+        "x": 460,
+        "y": 340,
+        "wires": [
+            [
+                "866db1178b6c6e2b"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "c8ce9724559c2b02",
+        "type": "function",
+        "z": "c731d0e8a174b926",
+        "name": "function 5",
+        "func": "msg.topic = \"multiple\";\nmsg.payload =\n    [{\n        nodeId: \"ns=2;s=ZoneOP[2].Mode\",\n        datatype: \"Int32\",\n        value: 10\n    },\n    {\n    nodeId: \"ns=2;s=Int32\",\n    datatype: \"Int32\",\n    value: 20\n}];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 340,
+        "wires": [
+            [
+                "6e9cc60423d918a7"
+            ]
+        ]
+    },
+    {
+        "id": "b6dbad6085e3fd61",
+        "type": "inject",
+        "z": "c731d0e8a174b926",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 340,
+        "wires": [
+            [
+                "c8ce9724559c2b02"
+            ]
+        ]
+    },
+    {
+        "id": "866db1178b6c6e2b",
+        "type": "debug",
+        "z": "c731d0e8a174b926",
+        "name": "debug 36",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "85ff213f95ccd586",
+        "type": "OpcUa-Client",
+        "z": "c731d0e8a174b926",
+        "endpoint": "a63d23549f2e20e3",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": 10,
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": 1,
+        "maxMessageSize": 8192,
+        "receiveBufferSize": 8192,
+        "sendBufferSize": 8192,
+        "setstatusandtime": false,
+        "keepsessionalive": false,
+        "name": "",
+        "x": 460,
+        "y": 480,
+        "wires": [
+            [
+                "484995743dbfca16"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "cfc996c7740eef50",
+        "type": "function",
+        "z": "c731d0e8a174b926",
+        "name": "function 6",
+        "func": "msg.topic = \"ns=2;s=ZoneOP[1].PLC_Error_No;datatype=Int32\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 480,
+        "wires": [
+            [
+                "85ff213f95ccd586"
+            ]
+        ]
+    },
+    {
+        "id": "b237803c0c519b5f",
+        "type": "inject",
+        "z": "c731d0e8a174b926",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 480,
+        "wires": [
+            [
+                "cfc996c7740eef50"
+            ]
+        ]
+    },
+    {
+        "id": "484995743dbfca16",
+        "type": "debug",
+        "z": "c731d0e8a174b926",
+        "name": "debug 37",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "d26cd87d8d4b1d01",
+        "type": "comment",
+        "z": "c731d0e8a174b926",
+        "name": "multiple write",
+        "info": "",
+        "x": 130,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "bba045d63c30558a",
+        "type": "comment",
+        "z": "c731d0e8a174b926",
+        "name": "single read",
+        "info": "",
+        "x": 100,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "bfcafe8530300762",
+        "type": "OpcUa-Client",
+        "z": "c731d0e8a174b926",
+        "endpoint": "a63d23549f2e20e3",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": 10,
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": 1,
+        "maxMessageSize": 8192,
+        "receiveBufferSize": 8192,
+        "sendBufferSize": 8192,
+        "setstatusandtime": false,
+        "keepsessionalive": false,
+        "name": "",
+        "x": 460,
+        "y": 140,
+        "wires": [
+            [
+                "ad0c2bf9929cd7cf"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "3f647534ce2efada",
+        "type": "function",
+        "z": "c731d0e8a174b926",
+        "name": "function 8",
+        "func": "// msg.topic=[\"ns=2;s=ZoneOP[2].Mode\",\"ns=2;s=Int32\"];\nmsg.topic = \"ns=2;s=ZoneOP[2].Mode\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 140,
+        "wires": [
+            [
+                "bfcafe8530300762"
+            ]
+        ]
+    },
+    {
+        "id": "7807b46d97992d02",
+        "type": "inject",
+        "z": "c731d0e8a174b926",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 110,
+        "y": 140,
+        "wires": [
+            [
+                "3f647534ce2efada"
+            ]
+        ]
+    },
+    {
+        "id": "ad0c2bf9929cd7cf",
+        "type": "debug",
+        "z": "c731d0e8a174b926",
+        "name": "debug 39",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "cb90c14dc1dd6d08",
+        "type": "comment",
+        "z": "c731d0e8a174b926",
+        "name": "Multiple read",
+        "info": "",
+        "x": 130,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "a63d23549f2e20e3",
+        "type": "OpcUa-Endpoint",
+        "endpoint": "opc.tcp://localhost:4840",
+        "secpol": "None",
+        "secmode": "None",
+        "none": true,
+        "login": false,
+        "usercert": false,
+        "usercertificate": "",
+        "userprivatekey": ""
+    }
+]
